@@ -1,6 +1,6 @@
 ## GAGA
 
-> "gaga" Because am not good at names and i was listening to lady gaga while coding this
+> "gaga" Because am not good at names and i was listening to lady gaga while coding this.
 
 https://github.com/Sanix-Darker/gaga/assets/22576758/40ed1d67-b46f-48ff-a5e6-d0b2b7fc8682
 
@@ -19,6 +19,11 @@ bash ./install.sh # this will just install openssl (and maybe some little requir
 cd gaga
 # you copy 'pre-commit' and 'post-receive'
 cp {./pre-commit,./post-receive} /path/to/your/repo/.git/hooks/
+
+# you can add files in your /path/to/your/repo/.gitgaga file
+# and all those are going to be :
+# - git ignore
+# - encrypted/decrypted for each commit/pull you do
 ```
 
 Now for each commit/pull, you're going to have encrypt/decrypt made on files specified on your `/path/to/your/repo/.gitgaga`.
@@ -29,3 +34,7 @@ Now for each commit/pull, you're going to have encrypt/decrypt made on files spe
 ```
 export GAGA_PASSPHRASE=umbrella
 ```
+
+### AUTHOR
+
+[darker](https://github.com/sanix-darker)
