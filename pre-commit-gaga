@@ -1,0 +1,40 @@
+#!/bin/bash
+
+GIT_GAGA_FILE="./.gitgaga"
+GIT_GAGA_FILE_LIST=$(cat $GIT_GAGA_FILE | grep -v "#")
+
+
+# git gaga files are sensible files, so they need to be in the gitignore
+# this method is just a checker for those file paths
+_checker_for_not_ignore_gaga_files(){
+    if [[ ! -f "$GIT_GAGA_FILE" ]]; then
+        exit 0
+    fi
+
+    echo "< gaga hooks checking..."
+
+    if [[ ! -f ".gitignore" ]]; then
+        # we force the gitignore file creation
+        touch .gitignore
+    fi
+
+    while IFS= read -r line; do
+        if ! grep -Fxq "$line" ".gitignore"; then
+            echo ""
+            echo "# added from .gitgaga hook" >> ".gitignore"
+            echo "$line" >> ".gitignore"
+            echo "> gaga added '$line' to .gitignore"
+        fi
+    done < $GIT_GAGA_FILE
+}
+
+encrypt_git_gaga_files(){
+    _checker_for_not_ignore_gaga_files
+
+    for file in "${GIT_GAGA_FILE_LIST[@]}"; do
+        openssl enc -aes-256-cbc -salt -pbkdf2 -in $file -out "$file.enc"
+        echo "> encrypted '$file' to '$file.enc'"
+    done
+}
+
+encrypt_git_gaga_files
