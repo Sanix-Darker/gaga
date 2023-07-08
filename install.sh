@@ -27,4 +27,4 @@ $(command -v gpg > /dev/null) && [[ $? == 0 ]] \
 
 echo "Congratulations setting up gitgaga."
 echo "Next steps are :"
-echo "cp {./pre-commit-gaga,./post-receive-gaga,./pre-push-gaga} /path/to/your/repo/.git/hooks/"
+echo "cp {./pre-commit,./post-receive} /path/to/your/repo/.git/hooks/"

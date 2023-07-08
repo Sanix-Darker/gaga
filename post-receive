@@ -1,0 +1,18 @@
+#!/bin/bash
+
+GIT_GAGA_FILE="./.gitgaga"
+GIT_GAGA_FILE_LIST=$(cat $GIT_GAGA_FILE | grep -v "#")
+
+decrypt_git_gaga_files(){
+    ENVPASS_SET=""
+    if [[ -v GAGA_PASSPHRASE ]]; then
+        ENVPASS_SET="-pass env:GAGA_PASSPHRASE "
+    fi
+
+    for file in "${GIT_GAGA_FILE_LIST[@]}"; do
+        openssl enc -d -aes-256-cbc -salt $(echo $ENVPASS_SET) -pbkdf2 -in "$file.enc" -out $file && [[ $? == 0 ]] || exit 1
+        echo "> decrypted '$file.enc' to '$file'"
+    done
+}
+
+decrypt_git_gaga_files

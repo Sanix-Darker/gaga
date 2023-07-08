@@ -31,8 +31,13 @@ _checker_for_not_ignore_gaga_files(){
 encrypt_git_gaga_files(){
     _checker_for_not_ignore_gaga_files
 
+    ENVPASS_SET=""
+    if [[ -v GAGA_PASSPHRASE ]]; then
+        ENVPASS_SET="-pass env:GAGA_PASSPHRASE "
+    fi
+
     for file in "${GIT_GAGA_FILE_LIST[@]}"; do
-        openssl enc -aes-256-cbc -salt -pbkdf2 -in $file -out "$file.enc"
+        openssl enc -aes-256-cbc -salt $(echo $ENVPASS_SET) -pbkdf2 -in $file -out "$file.enc" && [[ $? == 0 ]] || exit 1
         echo "> encrypted '$file' to '$file.enc'"
     done
 }
