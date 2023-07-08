@@ -1,9 +1,11 @@
 ## GAGA
 
-> "gaga" Because am not good at names and i as listening to lady gaga while coding this
+> "gaga" Because am not good at names and i was listening to lady gaga while coding this
 
-Gaga is a git hook that use `openssl` to encrypt and decrypt files you want to version on a public repository.
-This hook use "basic 256 `aes`" symmetric encryption method, so you're prompted with a passphrase encrypt or decrypt your files before a commit or after the commit.
+https://github.com/Sanix-Darker/gaga/assets/22576758/40ed1d67-b46f-48ff-a5e6-d0b2b7fc8682
+
+Gaga is a [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) that use [`openssl`](https://www.openssl.org/) to encrypt & decrypt files you want to version on a public repository but keep it private.
+This hook use "basic 256 `AES`" symmetric encryption, so you're prompted with a passphrase before a commit or after the pull from remote.
 
 ### HOW SET IT UP
 
